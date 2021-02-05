@@ -1,0 +1,1 @@
+A Type is the system to define the atomic element that can be exchange over the component
