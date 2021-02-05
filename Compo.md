@@ -1,7 +1,7 @@
 CompoMe is a Component Framework.
 
 CompoMe manage this element elements:
-- Type
+- Type [Type](http://lapin.fr)
 - Struct
 - Error
 - Event
