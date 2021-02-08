@@ -4,29 +4,29 @@ MODEL
 ----------
 
 CompoMe manage this elements:
-- [Type](Compo/Type.md)
-- [Struct](Compo/Struct.md)
-- [Error](Compo/Error.md)
-- [Event](Compo/Event.md)
+- [Type](Compo/Type)
+- [Struct](Compo/Struct)
+- [Error](Compo/Error)
+- [Event](Compo/Event)
 
-- [Bus](Compo/Bus.md)
-- [Interface](Compo/Interface.md)
+- [Bus](Compo/Bus)
+- [Interface](Compo/Interface)
 
-- [Component](Compo/Component.md)
-- [Connector](Compo/Connector.md)
+- [Component](Compo/Component)
+- [Connector](Compo/Connector)
 
-- [Link](Compo/Link.md)
+- [Link](Compo/Link)
 
-- [Deployment](Compo/Deployment.md)
+- [Deployment](Compo/Deployment)
 
 GENERATOR
 ----------
 
 CompoMe Have 4 kind of generator:
-- [C++](generator/Cpp.md)
-- [Uml](generator/Uml.md)
-- [Graph](generator/Graph.md)
-- [Python](generator/Python.md)
+- [C++](generator/Cpp)
+- [Uml](generator/Uml)
+- [Graph](generator/Graph)
+- [Python](generator/Python)
 
 FAQ
 ---
