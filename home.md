@@ -41,34 +41,52 @@ Run Test Check (Optional):
 ```
 ## Docker Solution (Windows/Linux/MacOS)
 
+
+Download Image: (image)[https://marger.it/CompoMe_Docker_img.tar.gz].
+How to ReBuild this image (__TODO__).
+
 ```bash
-# Download Image
-wget https://marger.it/CompoMe_Docker_img.tar.gz
 # load it
-sudo docker load -i ....
+docker load -i ....
 # run the docker image 
 # replace IMG by the IMAGE_ID 
 # replace PORT by a port wherre you want to bind ssh port of container
 # replace COMPO_DIR by the compo clone directory
-sudo docker run -d --name Compo --hostname CompoMeImg --privileged -v COMPO_DIR:/home/compozer/compo  -p PORT:22 -it IMG
-
-# Two Solutions
-# ------------
-
-# Solution 1: docker exec acess
-sudo docker exec -it -u compozer Compo bash
-
-# Solution 2: ssh acess (no way to log with PasswordAuthentication only with PubkeyAuthentication) 
-sudo docker exec -it Compo bash
-## in the docker terminal
-## add your key witch is place in ~/.ssh/id_rsa.pub
-emacs /etc/ssh/authorized_keys.d/compozer
-# exit the docker terminal
-
-# login with ssh
-ssh compozer@127.0.0.1 -p PORT
+docker run -d --name Compo --hostname CompoMeImg --privileged -v COMPO_DIR:/home/compozer/compo  -p PORT:22 -it IMG
 ```
 
+### Login
+
+Two Solutions
+-------------
+
+#### Solution 1: docker exec acess
+```bash
+docker exec -it -u compozer Compo bash
+```
+
+#### Solution 2: ssh acess (no way to log with PasswordAuthentication only with PubkeyAuthentication)
+Generate a ssh key.
+```bash
+ssh-keygen -N "" -f key
+```
+
+```bash
+docker exec -it Compo bash
+```
+
+In the docker terminal
+```bash
+# add your ssh-key key.pub
+cat >> /etc/ssh/authorized_keys.d/compozer
+<paste-it><ctrl-d>
+# exit the docker terminal
+```
+
+```bash
+# login with ssh
+ssh compozer@127.0.0.1 -p PORT -i key
+```
 
 TUTORIAL
 ----------
