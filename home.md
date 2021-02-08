@@ -21,6 +21,8 @@ sudo apt intall $(cat tool/dep_deb.txt)
 
 # ARCH TODO
 sudo pacman -S $(cat tool/dep_deb.txt)
+
+# guix environment -m tool/guix_manifest.scm
 ```
 Python dep:
 ```bash
