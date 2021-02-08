@@ -135,7 +135,7 @@ What you will never or rarely edit this file:
 
 ### Include it
 All the type will be put in Structs folder. if you define a namespace the type will be fine in the namespace folder. For example to use _S1_ include "Structs/S1.hpp" for _Prj1::myType_ include "Structs/Prj1/myType.hpp".
-```
+```c++
 #include "Structs/S1.hpp"
 #include "Structs/Prj1/MyType.hpp"
 ```
@@ -147,7 +147,7 @@ Just use it as a standard C++ class.
 
 #### get/set/accs
 All the data can be acess/ get(copy)/ and set.
-```
+```c++
 S2 l_v;
 // get (copy)
 i32 v1 = l_v.get_a();
@@ -161,7 +161,7 @@ i32 v2 = l_v.a_a();
 
 #### function
 The function can be call on the object like that.
-```
+```c++
 S3 l_v;
 i32 v1 = l_v.add(1,3);
 i32 v2 = l_v.sub(5,3);
@@ -169,7 +169,7 @@ i32 v2 = l_v.sub(5,3);
 
 #### stream
 A serialization
-```
+```c++
 std::stringstream ss;
 S3 l_v,l_v2;
 ss << l_v;
@@ -177,10 +177,6 @@ std::cout << ss.str(); // print it
 ss >> l_v2;
 ```
 
-### Where can i write the code ?
-You have to define the code of the function in "src/Structs/STRUCT_function.cpp" or "src/Structs/NAMESPACE/STRUCT_function.cpp"
-
-All the function are already define, you just need to write the core of the function.
 
 # USEFUL INFORMATION
 
@@ -192,4 +188,6 @@ Refer to the swig documentation
 
 
 # FAQ
-How to define a type
+## Where can i write the code ?
+You have to define the code of the function in "src/Structs/STRUCT_function.cpp" or "src/Structs/NAMESPACE/STRUCT_function.cpp"
+All the function are already define, you just need to write the core of the function.
