@@ -11,43 +11,14 @@ git clone --recurse-submodules https://gitlab.marger.it:10443/ruhtra/compo
 cd compo
 ```
 
-Install dependencies
------
-
-## Linux Systems:
-```bash
-# DEBIAN TODO
-sudo apt intall $(cat tool/dep_deb.txt) 
-
-# ARCH TODO
-sudo pacman -S $(cat tool/dep_deb.txt)
-
-# guix environment -m tool/guix_manifest.scm
-```
-Python dep:
-```bash
-pip install -r tool/env.txt
-```
-
-Build CompoMe C++ core:
-```bash
-cd test/gen/
-./core_build.sh
-```
-
-Run Test Check (Optional):
-```bash
-./run_test.sh cpp
-./run_test.sh graph
-./run_test.sh uml
-```
-## Docker Solution (Windows/Linux/MacOS)
-
+[Install dependencies](Install)
+---
 
 
 TUTORIAL
 ----------
-...TODO...
+My first Step begin [Here](Tutorial).
+
 
 EXAMPLE
 ---------
