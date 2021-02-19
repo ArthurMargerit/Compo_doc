@@ -51,9 +51,18 @@ CompoMe manage this elements:
 - [Link](Compo/Link)
 - [Deployment](Compo/Deployment)
 
+
+Configuration of a project
+----------
+
+
 GENERATOR
 ----------
-CompoMe Have 4 kind of generator:
+Common information of all generator.
+[Use it](generator/UseIt)
+[Improve it](generator/ImproveIt)
+
+CompoMe have 4 kinds of generator:
 - [C++](generator/Cpp)
 - [Uml](generator/Uml)
 - [Graph](generator/Graph)
