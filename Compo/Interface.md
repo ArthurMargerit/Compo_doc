@@ -25,6 +25,8 @@ CompoMe provide:
 | OPTIONS.CALLER_DBUS   | Generate the Call Class witch translate a _dbusMessage_ to a function/get/set | True/False | False   |
 | OPTIONS.FAKE_STREAM   | Generate the Fake Interface class witch translate the call to a std::string   | True/False | True    |
 | OPTIONS.CALLER_STREAM | Generate the Call Class witch translate a std::string to a call               | True/False | True    |
+| OPTIONS.FAKE_JSON   | Generate the Fake Interface class witch translate the call to a json | True/False | True    |
+| OPTIONS.CALLER_JSON | Generate the Call Class witch translate a json to a call               | True/False | True    |
 
 ## Gen
 List of generator:
