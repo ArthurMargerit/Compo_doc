@@ -1,8 +1,16 @@
-CompoMe is a Component Framework.
+
+<div dir="" align="center">
+<img src="https://gitlab.marger.it:10443/ruhtra/compo/-/wikis/CompoMe.png" >
+</div>
+
+CompoMe is a Component Framework. 
+The Concept is to split you code in block and define the way to comunicate between all the block.
+This organisation permit to controle the communication, interact, filter call, add new block.
+
 
 
 First Step:
-======
+=============
 
 Clone repository
 ----
@@ -15,10 +23,13 @@ cd compo
 ---
 
 
+CONCEPT
+---------
+The concept of component is explain [HERE](Concept).
+
 TUTORIAL
 ----------
-My first Step begin [Here](Tutorial).
-
+My first Step begin [HERE](Tutorial).
 
 EXAMPLE
 ---------
