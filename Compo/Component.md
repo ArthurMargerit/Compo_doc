@@ -169,5 +169,5 @@ c.get_p1().f3(1,2);
 
 
 <div dir="" align="center">
-<img src="https://gitlab.marger.it:10443/ruhtra/compo/-/wikis/compo/graph/component_ex.png" >
+<img src="https://gitlab.marger.it:10443/ruhtra/compo/-/wikis/Compo/graph/component_ex.png" >
 </div>
