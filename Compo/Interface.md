@@ -1,11 +1,11 @@
-A Interface is a list of _function_ and _data_ witch is provide by a COMPONENT.
+An Interface is a list of functions and data provided by a COMPONENT.
 
+CompoMe provides:
 
-CompoMe provide:
-- Function
-- data and get/set/acess
-- Caller with transforme a string to a call and return a string as result (see example)
-- Fake with take a call a convert it to a std::string and need a std:string for the answer.
+ - Functions
+ - Data with get/set/access methods
+ - Caller, which transforms a string into a function call and returns a string as the result (see example)
+ - Fake, which takes a call, converts it to a std::string, and requires a std::string for the answer
 
 # Model
 | Field     | Description                    | Form         | Opt | Def                   | Example                                       |
