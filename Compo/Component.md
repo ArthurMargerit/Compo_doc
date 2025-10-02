@@ -1,45 +1,70 @@
+# Component
 
-#  Model
+A **Component** is the main unit of composition in CompoMe.
+It can:
 
-| Field              | Description                                                  | Form   | Opt | Def                | Example                                            |   |   |
-|--------------------|--------------------------------------------------------------|--------|-----|--------------------|----------------------------------------------------|---|---|
-| NAME               | The name of the Component                                    | String |     |                    | C1, Struct_s1, MyStruct                            |   |   |
-| NAMESPACE          | The namespace of the Component                               | String | X   | ""                 | Package1, Package1::SubPackage2 , compo::base      |   |   |
-| PARENT             | The class that you inherit                                   | String | X   | "CompoMe::Structs" | Pack1::S1, MyStruct                                |   |   |
-| DATA               | list of Type Component                                       | List   | X   | Null               | go to example section                              |   |   |
-| FUNCTION           | a list of function to define                                 | List   | X   | Null               | go to example section                              |   |   |
-| OPTIONS            | option is a list                                             | List   | X   | Null               | go to _options_ section                            |   |   |
-| GEN                | a list of generator                                          | List   | X   | Null               | go to _gen_ section                                |   |   |
-| PROVIDE            | list of interface provided by this component                 | List   | x   | Null               | ["INTERFACE_NAME name_1", "INTERFACE_NAME name_2"] |   |   |
-| REQUIRE            | list of interface required by this component                 | List   | x   | Null               | ["INTERFACE_NAME name_1", "INTERFACE_NAME name_2"] |   |   |
-| EMITER             | list of bus that can be emit                                 | List   | x   | Null               | ...                                                |   |   |
-| RECIEVER           | list of bus that can be recieve                              | List   | x   | Null               | ...                                                |   |   |
-| CONNECTION         | list of connection between sub component and provide/require | List   | x   | Null               | ...                                                |   |   |
-| COMPONENT_INSTANCE | List of sub component                                        | List   | x   | Null               | ...                                                |   |   |
-| REQUIRE_LIST       |                                                              |        |     |                    |                                                    |   |   |
+* Store **data**
+* Expose **functions**
+* Provide and require **interfaces**
+* Emit and receive **events** through **buses**
+* Contain **sub-components** and define **connections** between them
 
-# Options
-| Field          | Description |
-|----------------|-------------|
-| OPTIONS.SWIG   |             |
-| OPTIONS.STREAM |             |
+All code scaffolding is generated, leaving only the business logic to implement.
 
-# Connections
-| Description | LEFT           | MID   | RIGHT          |
-|-------------|----------------|-------|----------------|
-|             | *PROVIDE*      | `|->` | *SC*.*PROVIDE* |
-|             | *SC*.*PROVIDE* | `-->` | *SC*.*REQUIRE* |
-|             | *SC*.*REQUIRE* | `>-|` | *REQUIRE*      |
-|             | *SC.*REQUIRE_LIST* | `>+|` | *REQUIRE*  |
-|             | *SC.*REQUIRE_LIST* | `+->` | *SC*.PROVIDE* |
-|             | *EMITER*       | `|=|` | *RECIEVER*     |
-|             | *SC*.*EMITER* | `>=|` | *EMITER*       |
-|             | *EMITER*       | `|=>` | *SC.RECIEVER*  |
-| Internal Connections | *SC*.*EMITER*  | `=>`  | *SC*.*RECIEVER* |
+---
 
+## Model
 
-# Example
-## INTERFACE REQUIRE/PROVIDE
+| Field                  | Description                                                  | Form   | Opt | Default            | Example                                              |
+| ---------------------- | ------------------------------------------------------------ | ------ | --- | ------------------ | ---------------------------------------------------- |
+| **NAME**               | The name of the Component                                    | String |     |                    | `C1`, `Struct_s1`, `MyStruct`                        |
+| **NAMESPACE**          | The namespace of the Component                               | String | X   | `""`               | `Package1`, `Package1::SubPackage2`, `compo::base`   |
+| **PARENT**             | The base class to inherit from                               | String | X   | `CompoMe::Structs` | `Pack1::S1`, `MyStruct`                              |
+| **DATA**               | List of data fields (Types)                                  | List   | X   | `Null`             | See examples                                         |
+| **FUNCTION**           | List of functions to define                                  | List   | X   | `Null`             | See examples                                         |
+| **OPTIONS**            | Options for generation                                       | List   | X   | `Null`             | See [Options](#options)                              |
+| **GEN**                | List of generators                                           | List   | X   | `Null`             | See [Generators](#generators)                        |
+| **PROVIDE**            | List of interfaces provided by this component                | List   | X   | `Null`             | `["INTERFACE_NAME name_1", "INTERFACE_NAME name_2"]` |
+| **REQUIRE**            | List of interfaces required by this component                | List   | X   | `Null`             | `["INTERFACE_NAME name_1", "INTERFACE_NAME name_2"]` |
+| **EMITTER**            | List of buses this component can emit                        | List   | X   | `Null`             | `Bus_A`                                              |
+| **RECEIVER**           | List of buses this component can receive                     | List   | X   | `Null`             | `Bus_B`                                              |
+| **CONNECTION**         | Connections between sub-components and provide/require ports | List   | X   | `Null`             | See [Connections](#connections)                      |
+| **COMPONENT_INSTANCE** | List of sub-components                                       | List   | X   | `Null`             | `["C2 cs", "C3 ci"]`                                 |
+| **REQUIRE_LIST**       | Special grouped require list                                 | List   | X   | `Null`             |                                                      |
+
+---
+
+## Options
+
+| Field              | Description                 |
+| ------------------ | --------------------------- |
+| **OPTIONS.SWIG**   | Generate bindings for SWIG  |
+| **OPTIONS.STREAM** | Enable stream serialization |
+
+---
+
+## Connections
+
+Connections describe how **provides**, **requires**, **emitter**, and **receiver** ports are linked between sub-components.
+
+| Description           | LEFT              | MID   | RIGHT         |               |            |
+| --------------------- | ----------------- | ----- | ------------- | ------------- | ---------- |
+| Provide link          | `PROVIDE`         | `     | ->`           | `SC.PROVIDE`  |            |
+| Internal link (p → r) | `SC.PROVIDE`      | `-->` | `SC.REQUIRE`  |               |            |
+| Require link          | `SC.REQUIRE`      | `>-   | `             | `REQUIRE`     |            |
+| Require list link     | `SC.REQUIRE_LIST` | `>+   | `             | `REQUIRE`     |            |
+| Back link to provide  | `SC.REQUIRE_LIST` | `+->` | `SC.PROVIDE`  |               |            |
+| Event link            | `EMITTER`         | `     | =             | `             | `RECEIVER` |
+| Emit to bus           | `SC.EMITTER`      | `>=   | `             | `EMITTER`     |            |
+| Bus to receive        | `EMITTER`         | `     | =>`           | `SC.RECEIVER` |            |
+| Internal event link   | `SC.EMITTER`      | `=>`  | `SC.RECEIVER` |               |            |
+
+---
+
+# Examples
+
+## Provide/Require Interfaces
+
 ```yaml
 - INTERFACE:
     NAME: I1
@@ -57,29 +82,34 @@
     DATA:
       - i32 b
     FUNCTION:
-      - i32 f1 (i32 p1)
+      - i32 f1(i32 p1)
     PROVIDE:
       - I1 p1
     REQUIRE:
       - I2 r1
 ```
 
+**Usage in C++**
+
 ```cpp
 Component_A c;
 
-// atribute
+// attributes
 c.set_b(1);
 c.get_b();
 
 // function call
 c.f1(2);
 
-// provide
+// provide access
 c.get_p1().f2();
-c.get_p1().f3(1,2);
+c.get_p1().f3(1, 2);
 ```
 
-## BUS EMITER/RECIEVER
+---
+
+## Bus Emitter/Receiver
+
 ```yaml
 - EVENT:
     NAME: ev1
@@ -105,25 +135,29 @@ c.get_p1().f3(1,2);
       - Bus_B b_emit
 ```
 
-###  Push a event to a component
+**Usage in C++**
+
 ```cpp
-   Comp_1 b;
-   
-   b.configuration();
-   b.connection();
-   b.start();
-   
-   // we create and push the event
-   ev1 e1;
-   b.get_b_recv().push(&e1);
-   
-   // The event will be process
-   b.step();
-   
-   b.stop();
+Comp_1 b;
+
+b.configuration();
+b.connection();
+b.start();
+
+// Create and push the event
+ev1 e1;
+b.get_b_recv().push(&e1);
+
+// The event will be processed
+b.step();
+
+b.stop();
 ```
 
-## SubComponent/SubConnector connection
+---
+
+## SubComponent / Connector Connections
+
 ```yaml
 - IMPORT: CompoMe.yaml
 
@@ -135,20 +169,20 @@ c.get_p1().f3(1,2);
 - COMPONENT:
     NAME: C2
     PROVIDE:
-    - I1 b
+      - I1 b
     REQUIRE:
-    - I2 c
-    - I2 c2
+      - I2 c
+      - I2 c2
     
 - COMPONENT:
     NAME: C3
     REQUIRE:
-    - I1 e
+      - I1 e
 
 - COMPONENT:
     NAME: C4
     PROVIDE:
-    - I2 e
+      - I2 e
 
 - COMPONENT:
     NAME: C1
@@ -167,7 +201,9 @@ c.get_p1().f3(1,2);
       - cs.c2 --> co.e
 ```
 
+<p align="center">
+  <img src="https://gitlab.marger.it:10443/ruhtra/compo/-/wikis/Compo/graph/component_ex.png" alt="Component graph example"/>
+</p>
 
-<div dir="" align="center">
-<img src="https://gitlab.marger.it:10443/ruhtra/compo/-/wikis/Compo/graph/component_ex.png" >
-</div>
+
+👉 Do you want me to also make a **“Cheat Sheet” section** at the end that summarizes *all possible Component constructs* (data, function, provide, require, emitter, receiver, sub-component, connection) in a compact table for quick reference?
