@@ -1,33 +1,41 @@
+# C++ Generator
 
-The Cpp generator is the most developed one.
-The Code generated is base on the C++11 standart and can be compiled by gcc(g++) and clang (clang++).
+The **C++ generator** is currently the most developed one.
+The generated code is based on the **C++11 standard** and can be compiled with both **GCC (g++)** and **Clang (clang++)**.
 
-Serializations systems supported:
------------------------------------------
-- Dbus
-- Stream
+---
 
-Connector
------------
-- Async call && return
-- Dispatche
-- Distribute
-- Logger
+## Serialization Systems Supported
 
-Link supported
------------------
-- Tcp server && Tcp client | Linux Socket
-- Udp server && Udp client | Linux Socket
-- Dbus server && Dbus client | (Dbus)[https://www.freedesktop.org/wiki/Software/dbus/]
-- Zmq server && Zmq client |(ZeroMq)[https://zeromq.org/]
-- Http server && Http client | Linux Socket + (Atomizes)[https://github.com/tinfoilboy/atomizes]
-- Https server && Https client (MBED tls)[https://tls.mbed.org/] + (Atomizes)[https://github.com/tinfoilboy/atomizes]
+* **DBus**
+* **Stream**
+* **JSON** (partial)
 
-Extra
------------------
-- Call to Interfaces
-- Terminal to Interfaces
-- Log systems
-- [Swig Support](http://www.swig.org/) (Add Python Biding)
-- [Esp32 Support](https://www.espressif.com/en/products/socs/esp32)
-- [Cmake Compilation](https://cmake.org/)
+---
+
+## Connectors
+
+* **Async call & return**
+* **Dispatcher**
+* **Distributor**
+* **Logger**
+
+---
+
+## Supported Links
+
+* **TCP server & TCP client** (Linux Sockets)
+* **UDP server & UDP client** (Linux Sockets)
+* **DBus server & DBus client** → [DBus](https://www.freedesktop.org/wiki/Software/dbus/)
+* **ZeroMQ server & client** → [ZeroMQ](https://zeromq.org/)
+* **HTTP server & client** (Linux Sockets + [Atomizes](https://github.com/tinfoilboy/atomizes))
+* **HTTPS server & client** (MbedTLS + [Atomizes](https://github.com/tinfoilboy/atomizes))
+
+---
+
+## Extras
+
+* Direct **calls to interfaces**
+* **Terminal** access to interfaces
+* Integrated **logging system**
+* [**SWIG** support](http://www.swig.org/) → Python bindings
