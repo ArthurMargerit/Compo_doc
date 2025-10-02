@@ -79,20 +79,4 @@ CompoMe have 4 kinds of generator:
 - [Graph](generator/Graph)
 - [Python](generator/Python)
 
-FAQ
----
-
-Can i add my own Generator or modified the existing one ?
-...TODO...
-
-I find a bug/troubleshooting, Where can i find a solution or submit it?
-...TODO...
-
-... ?
-...TODO...
-
-Troubleshooting
-----------
-
-...TODO...
 
