@@ -1,17 +1,16 @@
+Before starting this section, you need to have a working **build environment** and have already compiled the **CompoMe C++ core**.
 
-Avant de commencé cette section il est n'écesaire d'avoir un Environement de compilation, et d'avoir compilé le core de CompoMe C++.
+First, create a project directory:
 
-
-Crée un dosier.
 ```bash
 mkdir -p projects/Compo_Sound
 ```
 
+Next, let’s set up the required environment variables.
+The two main ones are:
 
-Nous allons commencé par definir les variables d'environement.
-Les deux principales sont:
-- COMPOME_PATH: Cette variable indique la position du repository eg /home/lapin/projects/compo
-- COMPOME_MODEL_PATH: list of path separate by ":" to all .yaml file of other projects
+* **COMPOME_PATH**: Path to the CompoMe repository (e.g., `/home/lapin/projects/compo`)
+* **COMPOME_MODEL_PATH**: A list of paths (separated by `:`) to all `.yaml` model files from other projects
 
 ```bash
 export COMPOME_PATH=~/compo
