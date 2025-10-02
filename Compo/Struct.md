@@ -1,45 +1,38 @@
+A Struct is a simple way to define a C++ class composed of other Structs or CompoMe types.
+CompoMe provides:
 
-A Struct is a simple way to define a c++ class withch is compose of other Struct or CompoMe TYPE.
-
-CompoMe provide:
 - Constructor/Destructor
-- Function
-- Data with set/get/acc
-- Builder 
-- Serialisation to std::stringstream
-- Serialisation to Dbus
+- Functions
+- Data with set/get/access methods
+- Builder pattern
+- Serialization to std::stringstream
+- Serialization to Dbus
+- UML rendering
 
-- UML Rendering
 
 # Model
 
-| Field     | Description                      | Form         | Opt | Def                | Example                                       |
-|-----------|----------------------------------|--------------|-----|--------------------|-----------------------------------------------|
-| NAME      | The name of the Struct           | String       |     |                    | S1, Struct_s1, MyStruct                       |
-| NAMESPACE | The namespace of the Struct      | String       | X   | ""                 | Package1, Package1::SubPackage2 , compo::base |
-| PARENT    | The class that you inherit       | String       | X   | "CompoMe::Structs" | Pack1::S1, MyStruct                           |
-| DATA      | list of Type Struct              | List<String> | X   | Null               | go to example section                         |
-| FUNCTION  | a list of function to define     | List<String> | X   | Null               | go to example section                         |
-| EXTRA     | add a extra serialisation string | Boolean      | X   | False              | True/False                                    |
-| HIDE      | a list of data to hide           | List<String> | X   | Null               | go to example section                         |
-| GEN       | a list of function generator     | List<String> | X   | Null               | Go to cpp/2.STRUCT/3.gen                      |
+| Field     | Description                          | Format         | Opt | Default             | Example                          |
+|-----------|--------------------------------------|----------------|-----|---------------------|----------------------------------|
+| NAME      | The name of the Struct               | String         |     |                     | S1, Struct_s1, MyStruct          |
+| NAMESPACE | The namespace of the Struct          | String         | X   | ""                  | Package1, Package1::SubPackage2, compo::base |
+| PARENT    | The parent class to inherit from     | String         | X   | "CompoMe::Structs"  | Pack1::S1, MyStruct              |
+| DATA      | List of Struct or CompoMe data types | List<String>   | X   | Null                | See example section             |
+| FUNCTION  | List of functions to define         | List<String>   | X   | Null                | See example section             |
+| EXTRA     | Add extra serialization string       | Boolean        | X   | False               | True/False                       |
+| HIDE      | List of data fields to hide         | List<String>   | X   | Null                | See example section             |
+| GEN       | List of function generators         | List<String>   | X   | Null                | See cpp/2.STRUCT/3.gen          |
 
-
-# Generator options
-.TODO.
-SWIG.
-DBUS.
-STREAM.
 
 # Example
 
-A Basic empty Struct:
+### Basic Empty Struct
 ```yaml
 - STRUCT:
     NAME: S1
 ```
 
-This a simple Struct with 2 data a and b
+### Simple Struct with 2 Data Fields
 ```yaml
 - STRUCT:
     NAME: S2
@@ -48,7 +41,7 @@ This a simple Struct with 2 data a and b
      - i32 b
 ```
 
-This a simple Struct with 2 Functions "add" and "sub"
+### Simple Struct with 2 Functions
 ```yaml
 - STRUCT:
     NAME: S3
@@ -57,24 +50,22 @@ This a simple Struct with 2 Functions "add" and "sub"
      - i32 sub(i32 p1, i32 p2)
 ```
 
-This 2 Structs with 1 which use the other
+### Two Structs, One Using the Other
 ```yaml
 - STRUCT:
     NAME: S4
     DATA:
-    - i32 a
-
+     - i32 a
 - STRUCT:
     NAME: S5
     DATA:
-    - S4 sub_struct
-    - i32 b
+     - S4 sub_struct
+     - i32 b
 ```
 
-
-This 3 structs with a simple parent link
+### Three Structs with Parent-Child Relationship
 ```yaml
-# mother class
+# Mother class
 - STRUCT:
     NAME: S_mother
     DATA:
@@ -95,43 +86,40 @@ This 3 structs with a simple parent link
      - i32 v3_ch
 ```
 
-To use i32 TYPE: you need to include CompoMe.yaml as follow `- IMPORT: "CompoMe.yaml"` or to redefined it.
--------
 
-
+# In C++
 
 # How To Use a CompoMe Struct
 To a use a CompoMe::Struct you need to include it.
 
+## Inheritance
+All the types extend `CompoMe::Struct`.
+You can address them as a `CompoMe::Struct* l_struct_pointer;`.
 
-
-## In C++
-All the Type extends CompoMe::Struct;
-Then you can address them as a `CompoMe::Struct* l_struct_pointer;`
+---
 
 ## Files
-you can find for a Struct many File:
-replace "NS" with the namespace of the struct and  "::" replaced by "/"  eg: "pkg1"=>"pkg1", "pkg1::pkg2::pkg3"=>"pkg1/pkg2/pkg3"
-replace "NAME" with the name of the STRUCT
+For a Struct, you can find several files.
+Replace `"NS"` with the namespace of the struct (with `"::"` replaced by `"/"`).
+For example: `"pkg1"` becomes `"pkg1"`, and `"pkg1::pkg2::pkg3"` becomes `"pkg1/pkg2/pkg3"`.
+Replace `"NAME"` with the name of the Struct.
 
-Include files:
------------------
-"inc/Structs/NS/NAME.hpp": Definition of the class NAME
-"inc/Structs/NS/NAME\_builder.hpp": Builder of the class NAME
-"inc/Structs/NS/NAME\_fac.hpp": System to build from stream the pointer of NAME
+### Include Files
+| File Path                                      | Description                                      |
+|------------------------------------------------|--------------------------------------------------|
+| `inc/Structs/NS/NAME.hpp`                      | Definition of the class `NAME`                  |
+| `inc/Structs/NS/NAME_builder.hpp`             | Builder of the class `NAME`                      |
+| `inc/Structs/NS/NAME_fac.hpp`                 | System to build from stream the pointer of `NAME`|
 
-Source files:
------------------
-
-What you will edit frequently this files:
-"src/Structs/NS/NAME.cpp": Contructor and Destructor of the class
-"src/Structs/NS/NAME\_function.cpp": Function definition
-
-What you will never or rarely edit this file:
-"src/Structs/NS/NAME\_fac.cpp": 
-"src/Structs/NS/NAME\_builder.cpp": 
-"src/Structs/NS/NAME\_serialization.cpp": Serialization of the stream
-"src/Structs/NS/NAME\_get\_set.cpp": The get/set/accesor of the class
+### Source Files
+| File Path                                      | Description                                      | Frequency of Edit |
+|------------------------------------------------|--------------------------------------------------|-------------------|
+| `src/Structs/NS/NAME.cpp`                      | Constructor and Destructor of the class          | Frequently        |
+| `src/Structs/NS/NAME_function.cpp`             | Function definition                              | Frequently        |
+| `src/Structs/NS/NAME_fac.cpp`                  |                                                  | Rarely            |
+| `src/Structs/NS/NAME_builder.cpp`              |                                                  | Rarely            |
+| `src/Structs/NS/NAME_serialization.cpp`        | Serialization of the stream                      | Rarely            |
+| `src/Structs/NS/NAME_get_set.cpp`              | The get/set/accessor of the class                 | Rarely            |
 
 ### Include it
 All the type will be put in Structs folder. if you define a namespace the type will be fine in the namespace folder. For example to use _S1_ include "Structs/S1.hpp" for _Prj1::myType_ include "Structs/Prj1/myType.hpp".
